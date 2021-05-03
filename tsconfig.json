@@ -3,8 +3,6 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "declaration": true,
-    "declarationMap": true,
     "sourceMap": true,
     "inlineSources": true,
     "outDir": "./",

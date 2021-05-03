@@ -50,6 +50,3 @@ export class NotFound extends LitElement {
   }
 }
 
-function NOT_FOUND(NOT_FOUND: any) {
-    throw new Error('Function not implemented.');
-}
