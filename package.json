@@ -8,6 +8,7 @@
     "build": "snowpack build"
   },
   "dependencies": {
+    "@vaadin/router": "^1.7.4",
     "lit": "^2.0.0-rc.1"
   },
   "devDependencies": {
