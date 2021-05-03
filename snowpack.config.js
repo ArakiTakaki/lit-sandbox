@@ -3,4 +3,11 @@ module.exports = {
     public: { url: '/', static: true },
     src: '/dist',
   },
+  routes: [
+    {
+      match: "routes",
+      src: ".*",
+      dest: "/index.html"
+    }
+  ]
 };
