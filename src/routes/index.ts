@@ -5,6 +5,7 @@ const INDEX = {
   path: '/',
   component: 'page-index',
 };
+
 const USERS = {
   path: '/users',
   component: 'page-users',

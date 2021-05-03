@@ -1,41 +1,59 @@
 import path from 'path';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-// import webpack from 'webpack';
 
-export default {
-  entry: './src/test.ts',
-  // mode: 'development',
-  mode: 'production',
-  target: 'node',
-  devtool: false,
-  output: {
-    filename: 'dist/index.js',
-    path: path.resolve(path.dirname(''), 'build'),
-    publicPath: path.resolve(path.dirname(''), 'public'),
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        // exclude: /node_modules/,
-      },
-    ],
-  },
-  resolve: {
-    extensions: ['.ts', '.js'],
-  },
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: 'public', to: '' },
+export default [
+  {
+    name: 'server',
+    entry: './src/server.ts',
+    mode: 'production',
+    target: 'node',
+    output: {
+      filename: 'server.js',
+      path: path.resolve(path.dirname(''), 'build'),
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: [
+            'ts-loader',
+            'thread-loader',
+          ]
+        },
       ],
-    }),
-  ],
-  devServer: {
-    contentBase: path.join(path.dirname(''), 'build'),
-    publicPath: '/',
-    port: 3031,
-  }
-};
+    },
+    resolve: {
+      extensions: ['.ts', '.js'],
+    },
+  },
+  {
+    name: 'client',
+    entry: './src/index.ts',
+    mode: 'development',
+    target: 'web',
+    output: {
+      filename: 'dist/index.js',
+      path: path.resolve(path.dirname(''), 'build'),
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: [
+            'ts-loader',
+          ]
+        },
+      ],
+    },
+    resolve: {
+      extensions: ['.ts', '.js'],
+    },
+    // devServer: {
+    //   contentBase: path.join(path.dirname(''), 'build'),
+    //   publicPath: '/',
+    //   port: 3031,
+    // }
+  },
+];
 
