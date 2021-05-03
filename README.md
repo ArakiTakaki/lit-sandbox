@@ -15,3 +15,24 @@ $ yarn install
 $ yarn start
 $ open http://localhost:8080
 ```
+
+## syntax setting
+
+### VIM
+
+```toml
+[[plugins]]
+repo = "cdata/vim-tagged-template"
+hook_add = """
+let g:taggedtemplate#tagSyntaxMap = {
+  \ "html": "html",
+  \ "md":   "markdown",
+  \ "css":  "css" }
+"""
+```
+
+### VSCode
+
+- lit-html
+- es6-string-css
+
