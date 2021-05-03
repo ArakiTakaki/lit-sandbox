@@ -1,4 +1,7 @@
 module.exports = {
+  optimize: {
+    minify: true,
+  },
   mount: {
     public: { url: '/', static: true },
     src: '/dist',
