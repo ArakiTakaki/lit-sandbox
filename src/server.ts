@@ -1,26 +1,33 @@
 import { render } from "@lit-labs/ssr/lib/render-with-global-dom-shim.js";
 import fastify, { RouteHandlerMethod } from 'fastify';
-import { html } from "lit";
 
+import { html, TemplateResult } from "lit";
+import './index.ts';
 
 const app = fastify({
   logger: true,
 });
 
+const renderring = (layout: TemplateResult) => {
+  const component = render(layout);
+  let data = '';
+  for (let raw of component) {
+    data += raw;
+  }
+  return data;
+}
+
 const layout = () => {
   return html`
-<div>hoge</div>
-`
+  <div>
+    <div>hoge</div>
+    <my-element />
+  </div>`;
 };
 
 const routeHandler: RouteHandlerMethod = async (_, reply) => {
-  const hoge = render(layout());
-  let data = '';
-  for (let b of hoge) {
-    data += b;
-  }
   reply.type('text/html');
-  return data;
+  return renderring(layout());
 }
 
 app.get('/', routeHandler);
