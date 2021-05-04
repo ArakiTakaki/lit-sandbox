@@ -1,0 +1,15 @@
+:host {
+  display: inline-block;
+  padding: 10px;
+  background: lightgray;
+}
+
+.planet {
+  color: var(--planet-color, blue);
+  cursor: pointer;
+}
+
+.hoge {
+  background: red;
+}
+

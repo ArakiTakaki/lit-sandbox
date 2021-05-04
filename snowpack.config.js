@@ -3,4 +3,5 @@ module.exports = {
     public: { url: '/', static: true },
     src: '/dist',
   },
+  plugins: ['plugin-css-export-string'],
 };

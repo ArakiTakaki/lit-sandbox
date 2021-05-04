@@ -8,10 +8,15 @@
     "build": "snowpack build"
   },
   "dependencies": {
-    "lit": "^2.0.0-rc.1"
+    "lit": "^2.0.0-rc.1",
+    "marked": "^2.0.3"
   },
   "devDependencies": {
+    "@types/marked": "^2.0.2",
+    "@types/stylus": "^0.48.34",
     "snowpack": "^3.3.7",
+    "stylus": "^0.54.8",
+    "plugin-css-export-string": "file:./plugins/plugin-css-export-string",
     "typescript": "^4.2.4"
   }
 }
