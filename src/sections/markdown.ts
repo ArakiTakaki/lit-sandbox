@@ -4,11 +4,9 @@ import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import styles from './githubMarkdown.proxy.css';
 import marked from 'marked';
 import { ResetCSS } from '../css';
-const litMarkdown = (text: string) => unsafeHTML(marked(text));
 
 @customElement("markdown-content")
 export class MyElement extends LitElement {
-  @property() slot = "";
   @property() content = "";
   static styles = [
     ResetCSS,
@@ -18,7 +16,7 @@ export class MyElement extends LitElement {
     console.log(this);
     return html`
       <div class="markdown-body">
-        ${litMarkdown(this.textContent || '')}
+        ${unsafeHTML(marked(this.content || ''))}
       </div>
     `;
   }

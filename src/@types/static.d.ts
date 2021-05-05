@@ -1,4 +1,6 @@
 declare module "*.css";
+declare module "*.md";
+
 interface CSSStyleSheet {
   replace(text: string): Promise<CSSStyleSheet>;
   replaceSync(text: string): void;
