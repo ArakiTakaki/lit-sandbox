@@ -1,14 +1,24 @@
 import {LitElement, html } from 'lit';
 import {customElement, property} from 'lit/decorators.js';
-import litMarkdown from '../components/litMarkdown';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
+import styles from './githubMarkdown.proxy.css';
+import marked from 'marked';
+import { ResetCSS } from '../css';
+const litMarkdown = (text: string) => unsafeHTML(marked(text));
 
 @customElement("markdown-content")
 export class MyElement extends LitElement {
+  @property() slot = "";
   @property() content = "";
+  static styles = [
+    ResetCSS,
+    styles,
+  ];
   render() {
+    console.log(this);
     return html`
-      <div>
-        ${litMarkdown(this.content)}
+      <div class="markdown-body">
+        ${litMarkdown(this.textContent || '')}
       </div>
     `;
   }
