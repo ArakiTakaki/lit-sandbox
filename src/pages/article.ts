@@ -1,18 +1,19 @@
 import {LitElement, html} from 'lit';
-import {customElement, state} from 'lit/decorators.js';
+import {customElement} from 'lit/decorators.js';
 import { asyncReplace } from 'lit/directives/async-replace.js';
 import styles from './index.proxy.css';
 import { ResetCSS } from '../css';
 import '../sections/markdown';
-
-async function *getArticle(): AsyncIterable<string> {
+const getArticlePath = (name: string) => `/articles/${name}.md`
+async function *getArticle(name: string) {
   yield 'loading';
-  const articleURL = (await import('./markdown.md')).default;
-  if (typeof articleURL !== 'string') yield 'not found article';
-  const response = await fetch(articleURL);
+  const response = await fetch(getArticlePath(name));
   yield 'fetched';
-  const result = await response.text();
-  yield result;
+  if (!response.ok) {
+    yield '404 not found';
+    return;
+  }
+  yield await response.text();
 }
 
 @customElement("my-article")
@@ -21,20 +22,13 @@ export class MyElement extends LitElement {
     ResetCSS,
     styles,
   ];
-  @state() textContent: (AsyncIterable<string> | null) = null;
-
-  constructor() {
-    super();
-    this.textContent = getArticle();
-  }
 
   render() {
     return html`
-<div>
-  <markdown-content content=${asyncReplace(this.textContent)}>
-    # hoge
-  </markdown-content>
-</dvi>
-`;
+      <div>
+        <markdown-content content=${asyncReplace(getArticle('markdown234'))}></markdown-content>
+      </div>
+    `;
   }
-}
+};
+
